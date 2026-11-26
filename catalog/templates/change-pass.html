@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change-pass</title>
+</head>
+<body>
+    {% if request.user.is_authenticated %}
+    <form action="" method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value='change'>
+    </form>
+    {% else %}
+    <p>please login</p>
+    <a href="{% url 'login' %}?next={{request.path}}">login</a>
+    <br>
+    <a href="{% url 'register' %}?next=/accounts/login">register</a>
+    {% endif %}
+
+    
+</body>
+</html>

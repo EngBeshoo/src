@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <h1>LOGIN</h1>
+
+    {% if form.errors %}
+       <p>UserName or PassWord is not correct</p>
+    {% endif %}
+    {% if next %}
+      {% if request.user.is_authenticated %}
+        <p>you don't have permistion to see this page</p>
+        {% else %}
+        <p>Please login</p>
+      {% endif %}
+    {% endif %}
+
+    <form action=""method='POST'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <a href="{% url 'register' %}?next=/accounts/login">register</a>
+        <input type="submit" value='submit'>
+        <input type="hidden" value='{{next}}'>
+    </form>
+</body>
+</html>
